@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sini Ngumpul — Ruang untuk Berkarya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f2ea;color:#171717;font-family:'DM Sans',sans-serif}
+nav{position:sticky;top:0;z-index:10;background:#f5f2eadd;backdrop-filter:blur(14px);border-bottom:1px solid #ddd7ca;padding:15px 6%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Space Grotesk';font-weight:700;font-size:22px}.logo span{display:inline-block;background:#171717;color:#fff;padding:3px 8px;border-radius:8px;transform:rotate(-2deg)}
+nav a{color:#333;text-decoration:none;margin-left:18px;font-size:14px}.hero{padding:80px 6% 55px;display:grid;grid-template-columns:1.35fr .65fr;gap:40px;max-width:1200px;margin:auto}
+h1{font-family:'Space Grotesk';font-size:clamp(52px,8vw,105px);line-height:.9;margin:0 0 25px;letter-spacing:-5px}.hero p{font-size:18px;line-height:1.6;max-width:600px;color:#5d5a53}
+.btn{display:inline-block;border:0;border-radius:999px;padding:13px 19px;background:#171717;color:#fff;text-decoration:none;font-weight:700;cursor:pointer}.btn.alt{background:#e4dfd3;color:#171717;margin-left:8px}
+.poster{background:#d8ff5f;border:2px solid #171717;border-radius:25px;padding:28px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;transform:rotate(2deg);box-shadow:8px 8px 0 #171717}.poster b{font-family:'Space Grotesk';font-size:42px;line-height:.95}
+section{max-width:1200px;margin:auto;padding:55px 6%}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.sectionhead h2{font-family:'Space Grotesk';font-size:38px;margin:0}.sectionhead p{margin:0;color:#777}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #ddd7ca;border-radius:18px;padding:20px}.card .tag{font-size:12px;font-weight:700;text-transform:uppercase;color:#777}.card h3{font-family:'Space Grotesk';font-size:23px;margin:10px 0}.card p{color:#666;line-height:1.5}.work{min-height:220px;display:flex;flex-direction:column;justify-content:end;background:#e9e3d6}.work:nth-child(2){background:#c8d9ff}.work:nth-child(3){background:#ffd0b5}.work .visual{font-family:'Space Grotesk';font-size:48px;font-weight:700;margin-bottom:auto}
+.mading{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.note{border:2px solid #171717;background:#fff9dc;padding:28px;border-radius:18px}.note h3{font-size:30px;margin:8px 0;font-family:'Space Grotesk'}.side{display:grid;gap:18px}.mini{padding:22px;border-radius:18px;background:#171717;color:white}.mini:nth-child(2){background:#d8ff5f;color:#171717}
+.members{display:flex;gap:10px;flex-wrap:wrap}.member{background:#fff;border:1px solid #ddd7ca;border-radius:999px;padding:10px 15px}.agenda{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.date{font-family:'Space Grotesk';font-size:34px}
+.security{background:#171717;color:#fff;max-width:none}.security-inner{max-width:1200px;margin:auto}.security-status{font-size:12px;font-weight:700;border:1px solid #555;border-radius:999px;padding:8px 12px}.security-status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#d8ff5f;margin-right:6px}.security-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.security-card{background:#222;border:1px solid #3b3b3b;border-radius:18px;padding:22px}.security-card h3{font-family:'Space Grotesk';font-size:22px;margin:8px 0}.security-card p{color:#bbb;line-height:1.5}.security-card b{color:#d8ff5f}.log{margin-top:18px;padding:15px 18px;border:1px solid #3b3b3b;border-radius:12px;color:#aaa;font-size:13px}
+footer{margin-top:40px;background:#171717;color:#fff;padding:45px 6%;display:flex;justify-content:space-between;gap:30px}.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.open{display:flex}.modalbox{background:#f5f2ea;max-width:520px;width:100%;border-radius:22px;padding:25px}.modalbox input,.modalbox textarea{width:100%;margin:7px 0 14px;padding:13px;border:1px solid #ccc;border-radius:10px;background:#fff}.close{float:right;cursor:pointer;font-size:25px}
+#toast{position:fixed;right:18px;bottom:18px;background:#171717;color:#fff;padding:14px 17px;border-radius:12px;display:none;z-index:50;max-width:330px}
+@media(max-width:750px){nav .links{display:none}.hero{grid-template-columns:1fr;padding-top:55px}h1{letter-spacing:-3px}.grid,.agenda,.mading,.security-grid{grid-template-columns:1fr}section{padding-top:38px;padding-bottom:38px}.sectionhead{display:block}.sectionhead p{margin-top:7px}footer{display:block}}
+</style>
+</head>
+<body>
+<nav><div class="logo"><span>SINI</span> NGUMPUL</div><div class="links"><a href="#mading">Mading</a><a href="#karya">Karya</a><a href="#anggota">Anggota</a><a href="#agenda">Agenda</a><a href="#gabung">Gabung</a><a href="#security">Security</a><a href="#" onclick="openLogin();return false">Login</a></div></nav>
+
+<header class="hero"><div><div style="font-weight:700;margin-bottom:15px">KOMUNITAS SENI & KARYA</div><h1>Tempat ide<br>jadi karya.</h1><p>Sini Ngumpul adalah ruang untuk orang-orang yang ingin membuat sesuatu, saling menginspirasi, berkembang bersama, dan menunjukkan karya tanpa takut dihakimi.</p><a class="btn" href="#karya">Lihat karya</a><a class="btn alt" href="#gabung">Ikut ngumpul</a></div><div class="poster"><small>MANIFESTO #01</small><b>NGGAK HARUS JAGO.<br>YANG PENTING MULAI.</b><small>Datang. Bikin. Bagikan. Tumbuh.</small></div></header>
+
+<section id="mading"><div class="sectionhead"><div><h2>Mading</h2><p>Suara, cerita, dan kabar dari dalam komunitas.</p></div></div><div class="mading"><article class="note"><div class="tag">MADING / OPINI</div><h3>Kenapa kita harus ngumpul?</h3><p>Karena ide yang disimpan sendiri cuma jadi rencana. Di sini, kita bertemu untuk saling memantik: satu orang membawa ide, yang lain membawa sudut pandang, lalu lahirlah sesuatu yang baru.</p><b>— Sini Ngumpul</b></article><div class="side"><article class="mini"><div class="tag">OPEN CALL</div><h3>Ruang Karya #01</h3><p>Punya ilustrasi, foto, tulisan, musik, video, atau karya lain? Pajang di Mading komunitas.</p><button class="btn" onclick="openWork()">Kirim karya →</button></article><article class="mini"><div class="tag">CATATAN</div><h3>“Berkarya itu bukan lomba.”</h3><p>Kita tumbuh dengan ritme masing-masing.</p></article></div></div></section>
+
+<section id="karya"><div class="sectionhead"><div><h2>Karya Terbaru</h2><p>Karya yang sudah lolos moderasi.</p></div></div><div class="grid" id="works"><article class="card work"><div class="visual">01<br>RUANG</div><div class="tag">Fotografi · Raka</div><h3>Sepulang Hujan</h3><p>Seri foto tentang kota setelah hujan.</p></article><article class="card work"><div class="visual">02<br>SUARA</div><div class="tag">Tulisan · Naya</div><h3>Tempat Pulang</h3><p>Catatan pendek tentang rumah yang tidak selalu berupa tempat.</p></article><article class="card work"><div class="visual">03<br>GERAK</div><div class="tag">Video · Dimas</div><h3>30 Detik Kota</h3><p>Eksperimen visual dari potongan kehidupan sehari-hari.</p></article></div></section>
+
+<section id="anggota"><div class="sectionhead"><div><h2>Orang-orangnya</h2><p>Berbeda minat, satu tempat untuk tumbuh.</p></div></div><div class="members"><span class="member">🎨 Ilustrator</span><span class="member">📷 Fotografer</span><span class="member">✍️ Penulis</span><span class="member">🎬 Videografer</span><span class="member">🎸 Musisi</span><span class="member">🧠 Ideator</span><span class="member">🖌️ Seniman</span><span class="member">💻 Kreator</span></div></section>
+
+<section id="agenda"><div class="sectionhead"><div><h2>Agenda</h2><p>Tempat kita benar-benar ketemu.</p></div></div><div class="agenda"><div class="card"><div class="date">12<br>OKT</div><h3>Ngumpul #01</h3><p>Kenalan, ngobrol, dan bawa satu ide mentah.</p></div><div class="card"><div class="date">19<br>OKT</div><h3>Workshop Karya</h3><p>Bareng-bareng mengubah ide menjadi bentuk.</p></div><div class="card"><div class="date">26<br>OKT</div><h3>Open Mading</h3><p>Pamer karya dan cerita dari anggota.</p></div></div></section>
+
+<section id="gabung"><div style="background:#d8ff5f;border:2px solid #171717;border-radius:24px;padding:35px;text-align:center"><h2 style="font-family:'Space Grotesk';font-size:42px;margin:0 0 10px">Punya sesuatu untuk dibuat?</h2><p>Jangan tunggu sempurna. Sini, ngumpul.</p><button class="btn" onclick="openWork()">Bagikan Karya</button></div></section>
+
+<section id="security" class="security"><div class="security-inner"><div class="sectionhead"><div><h2>Security Guard</h2><p>Penjaga ruang komunitas dari spam dan penyalahgunaan.</p></div><span class="security-status"><i></i> GUARD AKTIF</span></div><div class="security-grid"><article class="security-card"><div>🛡️</div><h3>Rate Limit</h3><p>Pengiriman karya dibatasi di server agar spam tidak membanjiri Mading.</p><b>Server-side</b></article><article class="security-card"><div>🔐</div><h3>Input Guard</h3><p>Input diperiksa dan pola HTML/script berbahaya ditolak sebelum masuk database.</p><b>Aktif</b></article><article class="security-card"><div>🚨</div><h3>Activity Watch</h3><p>Login gagal, pengiriman, dan tindakan moderasi dicatat untuk admin.</p><b>Memantau</b></article></div><div class="log" id="securityLog"><b>Security log:</b> Guard aktif.</div></div></section>
+
+<footer><div><div class="logo"><span>SINI</span> NGUMPUL</div><p>Ngumpul untuk berkarya.<br>Maju dan berkembang bersama.</p></div><div><b>Ruang ini milik kita semua.</b><p style="color:#aaa">© 2026 Sini Ngumpul</p></div></footer>
+
+<div class="modal" id="workModal"><div class="modalbox"><span class="close" onclick="closeWork()">×</span><h2 style="font-family:'Space Grotesk'">Bagikan Karya</h2><p>Karya akan masuk sebagai <b>pending</b> dan harus disetujui moderator.</p><input id="name" maxlength="100" placeholder="Nama kamu"><input id="title" maxlength="160" placeholder="Judul karya"><input id="type" maxlength="80" placeholder="Jenis karya"><textarea id="desc" maxlength="1000" rows="4" placeholder="Ceritakan sedikit tentang karya ini"></textarea><button class="btn" onclick="submitWork()">Kirim ke Mading</button></div></div>
+
+<div class="modal" id="loginModal"><div class="modalbox"><span class="close" onclick="closeLogin()">×</span><h2 style="font-family:'Space Grotesk'">Login Admin / Moderator</h2><input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Password"><button class="btn" onclick="login()">Masuk</button><div id="loginResult" style="margin-top:12px"></div></div></div>
+<div id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",3500)}
+function openWork(){$("workModal").classList.add("open")}
+function closeWork(){$("workModal").classList.remove("open")}
+function openLogin(){$("loginModal").classList.add("open")}
+function closeLogin(){$("loginModal").classList.remove("open")}
+async function submitWork(){
+  const payload={name:$("name").value,title:$("title").value,type:$("type").value,description:$("desc").value};
+  try{
+    const r=await fetch("/api/works",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||"Pengiriman ditolak.");
+    toast(data.message); $("name").value=$("title").value=$("type").value=$("desc").value=""; closeWork();
+  }catch(e){toast(e.message)}
+}
+async function login(){
+  const result=$("loginResult"); result.textContent="Memproses...";
+  try{
+    const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("email").value,password:$("password").value})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error);
+    result.textContent="Login berhasil sebagai "+data.user.role+".";
+    setTimeout(()=>{closeLogin();location.href="/admin.html"},500);
+  }catch(e){result.textContent=e.message}
+}
+async function loadWorks(){
+  try{
+    const r=await fetch("/api/works"); const data=await r.json();
+    if(!data.works?.length)return;
+    const el=$("works");
+    el.innerHTML=data.works.map((w,i)=>`<article class="card work"><div class="visual">${String(i+1).padStart(2,"0")}<br>KARYA</div><div class="tag">${escapeHtml(w.type)} · ${escapeHtml(w.name)}</div><h3>${escapeHtml(w.title)}</h3><p>${escapeHtml(w.description)}</p></article>`).join("");
+  }catch(_){}
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+loadWorks();
+</script>
+</body></html>

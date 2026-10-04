@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — Sini Ngumpul</title>
+<style>body{font-family:Arial,sans-serif;margin:0;background:#f5f2ea;color:#171717}.wrap{max-width:1100px;margin:auto;padding:30px 20px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.btn{border:0;border-radius:999px;padding:11px 16px;background:#171717;color:#fff;cursor:pointer}.panel{background:#fff;border:1px solid #ddd7ca;border-radius:16px;padding:18px;margin-top:18px}.item{border-top:1px solid #ddd;padding:16px 0}.item:first-child{border-top:0}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eee;font-size:12px}.actions button{margin:5px 5px 0 0}.danger{background:#a33}.ok{background:#315f28}.log{font-size:13px;color:#555;padding:6px 0;border-bottom:1px solid #eee}</style></head>
+<body><div class="wrap"><div class="top"><div><h1>Sini Ngumpul — Security Guard</h1><p id="me">Memeriksa sesi...</p></div><button class="btn" onclick="logout()">Keluar</button></div>
+<div class="panel"><h2>Moderasi Karya</h2><div id="works">Memuat...</div></div>
+<div class="panel"><h2>Security Log</h2><div id="logs">Memuat...</div></div></div>
+<script>
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+async function load(){
+ const me=await fetch("/api/me").then(r=>r.json());
+ if(!me.user||!["admin","moderator"].includes(me.user.role)){location.href="/";return}
+ document.getElementById("me").textContent=me.user.name+" · "+me.user.role;
+ const data=await fetch("/api/moderation/works").then(r=>r.json());
+ document.getElementById("works").innerHTML=data.works.length?data.works.map(w=>`<div class="item"><span class="pill">${esc(w.status)}</span><h3>${esc(w.title)}</h3><div>${esc(w.name)} · ${esc(w.type)}</div><p>${esc(w.description)}</p><div class="actions"><button class="btn ok" onclick="moderate(${w.id},'approved')">Setujui</button><button class="btn danger" onclick="moderate(${w.id},'rejected')">Tolak</button></div></div>`).join(""):"Belum ada kiriman.";
+ const logs=await fetch("/api/security/logs").then(r=>r.json());
+ document.getElementById("logs").innerHTML=logs.logs.map(l=>`<div class="log"><b>${esc(l.event)}</b> · ${esc(l.ip||"")} · ${esc(l.created_at)}</div>`).join("");
+}
+async function moderate(id,status){await fetch("/api/moderation/works/"+id,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})});load()}
+async function logout(){await fetch("/api/logout",{method:"POST"});location.href="/"}
+load();
+</script></body></html>
